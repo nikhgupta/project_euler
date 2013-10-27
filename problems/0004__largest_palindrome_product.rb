@@ -17,12 +17,32 @@ module ProjectEuler
   class Solution4 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 3
+      raise ArgumentError, "Don't you think, n = #{n} is too big for me to handle?" if n > 5
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+      # solved:
+      self.mark_as_solved
 
-      # start writing your code now..
+      # code:
+      # 999999 998899 997799 ..
+      ms = []
+      max = 10**(n) - 1
+      min = 10**(n-1)
+      range = (min..max).to_a.reverse
+      range.each do |i|
+        range.each do |j|
+          m = (i * j)
+          break if m < 100001
+          ms.push m
+          # it will be a bad idea to do: ms.push m if m.to_s == m.to_s.reverse
+          # and, will instead be more efficient to sort all products and detect the first palindrome
+          # benchmarks: former: ~ 0.25 seconds | later: ~ 0.70 seconds
+        end
+      end
+
+      ms.sort.reverse.detect{|a| a.to_s == a.to_s.reverse }
     end
   end
 end

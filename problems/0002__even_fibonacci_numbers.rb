@@ -19,12 +19,25 @@ module ProjectEuler
   class Solution2 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 4000000
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+      # solved:
+      self.mark_as_solved
 
-      # start writing your code now..
+      # code:
+      sum = 0; prev1 = prev2 = 1;
+      nf  = 2
+      while nf < n
+        prev1 = prev2
+        prev2 = nf
+        sum += nf if nf % 2 == 0
+        nf = prev1 + prev2
+      end
+
+      # solution:
+      sum
     end
   end
 end

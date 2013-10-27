@@ -7,11 +7,15 @@
 module ProjectEuler
   class BaseSolution
 
-    attr_reader :id, :solved
+    attr_reader :id, :solved, :params
 
     def initialize
       @solved   = false
       @solution = {}
+    end
+
+    def params=(args = [])
+      @params = args
     end
 
     def pending?

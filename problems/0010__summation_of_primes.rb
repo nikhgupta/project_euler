@@ -15,13 +15,46 @@ require File.dirname(File.dirname(__FILE__)) + '/lib/base.rb'
 module ProjectEuler
   class Solution10 < BaseSolution
 
-    def solve
-      # this method should start execution to return the answer to the problem.
+    def solve; solve1; end
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+    def solve1
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 2000000
 
-      # start writing your code now..
+      # solved:
+      self.mark_as_solved
+
+      # code:
+      require 'prime'
+      Prime.take_while{|k| k < n}.inject(&:+)
+    end
+
+    def solve2
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 2000000
+
+      # solved:
+      self.mark_as_solved
+
+      # code:
+      sum = 5
+      k = 5
+      while k < n
+        sum += k if is_prime?(k)
+        k += 1
+      end
+
+      # answer
+      sum
+    end
+
+    def is_prime?(k)
+      (2..(Math.sqrt(k).to_i)).each do |x|
+        return false if k % x == 0
+      end
+      true
     end
   end
 end

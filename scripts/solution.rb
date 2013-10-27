@@ -17,14 +17,13 @@ class ProjectEuler::Solution
     print "#{shorten(data[:title])} | "
     require file
     solution = ProjectEuler.const_get("Solution#{@id}").new
+    solution.params = ARGV
     solution.try_solution
     if solution.pending?
       puts "Solution is pending!"
     else
       puts "It took me: #{"%02f" % solution.time} seconds. | Solution: #{solution.answer}"
     end
-  rescue Exception => e
-    puts "Encountered an error: #{e.message}!"
   end
 end
 

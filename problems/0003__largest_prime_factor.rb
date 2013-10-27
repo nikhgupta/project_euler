@@ -16,12 +16,24 @@ module ProjectEuler
   class Solution3 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 600851475143
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+      # solved:
+      self.mark_as_solved
 
-      # start writing your code now..
+      # code:
+      lower_divisors_of(n).detect{|i| is_prime?(i)}
+    end
+
+    def lower_divisors_of(n)
+      data = (2..(Math.sqrt(n).to_i)).select{ |a| n % a == 0 }
+      data.map{|a| [a, n/a]}.flatten.sort.reverse
+    end
+
+    def is_prime?(n)
+      lower_divisors_of(n).empty?
     end
   end
 end

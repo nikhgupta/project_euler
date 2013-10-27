@@ -4,8 +4,8 @@
 # The Problem: https://projecteuler.net/problem=9
 # ============================================================================
 # A Pythagorean triplet is a set of three natural numbers, a b c, for which,
-# a2 + b2 = c2
-# For example, 32 + 42 = 9 + 16 = 25 = 52.
+# a^2 + b^2 = c^2
+# For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2.
 # There exists exactly one Pythagorean triplet for which a + b + c = 1000.Find
 # the product abc.
 # ----------------------------------------------------------------------------
@@ -19,12 +19,24 @@ module ProjectEuler
   class Solution9 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 1000
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+      # solved:
+      self.mark_as_solved
 
-      # start writing your code now..
+      # code:
+      # solving, we get:
+      # b = ( 5 * 10^5 - 1000) / (1000 - a)
+      # c = 1000 - (a + b)
+      # we have our solution, when for integral 'a', we have integral 'b'
+      # solution => a: 200 | b: 375 | c: 425
+
+      (1..499).each do |a|
+        b = (500000 - 1000 * a) / (1000 - a).to_f
+        return (a * b * (1000 - (a + b))).to_i if b.floor == b
+      end
     end
   end
 end

@@ -18,12 +18,28 @@ module ProjectEuler
   class Solution5 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 20
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+      # solved:
+      self.mark_as_solved
 
-      # start writing your code now..
+      # code:
+      ans = 1
+      (1..n).each { |k| ans *= (k/gcd(ans,k)) }
+
+      # answer:
+      ans
+    end
+
+    def gcd(q,d)
+      d, q = [ q, d ].sort
+      r = q % d
+      while true
+        return d if r == 0
+        q = d; d = r; r = q % d
+      end
     end
   end
 end

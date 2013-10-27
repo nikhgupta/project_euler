@@ -4,9 +4,9 @@
 # The Problem: https://projecteuler.net/problem=6
 # ============================================================================
 # The sum of the squares of the first ten natural numbers is,
-# 12 + 22 + ... + 102 = 385
+# 1^2 + 2^2 + ... + 10^2 = 385
 # The square of the sum of the first ten natural numbers is,
-# (1 + 2 + ... + 10)2 = 552 = 3025
+# (1 + 2 + ... + 10)^2 = 55^2 = 3025
 # Hence the difference between the sum of the squares of the first ten natural
 # numbers and the square of the sum is 3025  385 = 2640.
 # Find the difference between the sum of the squares of the first one hundred
@@ -22,12 +22,26 @@ module ProjectEuler
   class Solution6 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 100
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+      # solved:
+      self.mark_as_solved
 
-      # start writing your code now..
+      # logic:
+      #
+      #                           n * (n + 1)
+      # sum of first n numbers = -------------
+      #                                2
+      #
+      #                           n * (n + 1) * (2n + 1)
+      # sum of first n squares = ------------------------
+      #                                     6
+
+      # code:
+      # ((n*(n+1))/2)**2 - (n*(n+1)*(2*n + 1))/6
+      (n * (n+1) * (3*n*n - n - 2))/12
     end
   end
 end

@@ -17,12 +17,28 @@ module ProjectEuler
   class Solution7 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 10001
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+      # solved:
+      self.mark_as_solved
 
-      # start writing your code now..
+      # code:
+      counter = 2
+      k = 5
+      while true
+        counter += 1 if is_prime?(k)
+        return k if counter == n
+        k += 1
+      end
+    end
+
+    def is_prime?(k)
+      (2..(Math.sqrt(k).to_i)).each do |x|
+        return false if k % x == 0
+      end
+      true
     end
   end
 end

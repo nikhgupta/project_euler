@@ -17,12 +17,26 @@ module ProjectEuler
   class Solution1 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 1000
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+      # solved:
+      self.mark_as_solved
 
-      # start writing your code now..
+      # logic:
+      # 3,6,9,12,15,18 => m = (20-1)/3  = 6; s  = 3  * m(m+1)/2 = 63
+      # 5,10,15        => m = (20-1)/5  = 3; s += 5  * m(m+1)/2 = 93
+      # 15             => m = (20-1)/15 = 1; s -= 15 * m(m+1)/2 = 78
+      # 3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 = 78
+
+      # code:
+      sum_of_divisibles_below(n, 3) + sum_of_divisibles_below(n, 5) - sum_of_divisibles_below(n, 15)
+    end
+
+    def sum_of_divisibles_below(n, d)
+      k = (n-1)/d
+      (d * k * (k+1))/2
     end
   end
 end
