@@ -26,7 +26,6 @@ module ProjectEuler
       n = @params[0].to_i
       n = n > 0 ? n : 1000
 
-
       # solved:
       self.mark_as_solved
 

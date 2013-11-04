@@ -7,11 +7,15 @@
 module ProjectEuler
   class BaseSolution
 
-    attr_reader :id, :solved, :params
+    attr_reader :solved, :params
 
     def initialize
       @solved   = false
       @solution = {}
+    end
+
+    def id
+      self.class.to_s.gsub("ProjectEuler::Solution", "").to_i
     end
 
     def params=(args = [])
@@ -24,6 +28,11 @@ module ProjectEuler
 
     def mark_as_solved
       @solved = true
+    end
+
+    def read_data_from_input_file
+      file = File.join(File.dirname(File.dirname(__FILE__)), "data", "problem-#{self.id.to_s}.txt")
+      File.read file
     end
 
     def try_solution
