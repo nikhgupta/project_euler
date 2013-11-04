@@ -26,13 +26,14 @@ module ProjectEuler
       # solved:
       self.mark_as_solved
 
-      # code:
+      # logic:
       # solving, we get:
       # b = ( 5 * 10^5 - 1000) / (1000 - a)
       # c = 1000 - (a + b)
       # we have our solution, when for integral 'a', we have integral 'b'
       # solution => a: 200 | b: 375 | c: 425
 
+      # code:
       (1..499).each do |a|
         b = (500000 - 1000 * a) / (1000 - a).to_f
         return (a * b * (1000 - (a + b))).to_i if b.floor == b

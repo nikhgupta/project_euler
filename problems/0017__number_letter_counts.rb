@@ -22,12 +22,38 @@ module ProjectEuler
   class Solution17 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 1000
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
 
-      # start writing your code now..
+      # solved:
+      self.mark_as_solved
+
+      # no other "n" would work
+      return "Solution is bound for n = 1000" unless n == 1000
+
+      # code:
+      # 36: one, two, three, four, five, six, seven, eight, nine
+      # 70: ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen
+      # 47: twenty, thirty, fourty, fifty, sixty, seventy, eighty, ninety
+      # 10: hundred
+      # 08: thousand
+
+      count = {}
+      # count from 1 to 99
+      count[:d1_9]   = 36
+      count[:d11_19] = 70
+      count[:d10x]   = 46
+      count[:d1_99]  = 9 * count[:d1_9] + count[:d11_19] + count[:d10x] * 10
+
+      # count from 1 to 999
+      count[:d100]   = 7 # hundred
+      count[:dand]   = 3 # and
+      count[:d1_999] = count[:d1_99] * 10 + 900 * count[:d100] + 100 * count[:d1_9] + 99 * 9 * count[:dand]
+
+      # asnwer
+      count[:d1_999] + 11
     end
   end
 end

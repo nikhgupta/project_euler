@@ -8,7 +8,13 @@
 # first ten terms would be:
 # 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
 # Let us list the factors of the first seven triangle numbers:
-#  1: 1 3: 1,3 6: 1,2,3,610: 1,2,5,1015: 1,3,5,1521: 1,3,7,2128: 1,2,4,7,14,28
+# 1 : 1
+# 3 : 1,3
+# 6 : 1,2,3,6
+# 10: 1,2,5,10
+# 15: 1,3,5,15
+# 21: 1,3,7,21
+# 28: 1,2,4,7,14,28
 # We can see that 28 is the first triangle number to have over five divisors.
 # What is the value of the first triangle number to have over five hundred
 # divisors?
@@ -23,12 +29,25 @@ module ProjectEuler
   class Solution12 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 500
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+      # solved:
+      self.mark_as_solved
 
-      # start writing your code now..
+      # code:
+      k = 1
+      while true
+        tk = (k*(k+1))/2
+        return tk if divisors(tk) > n
+        k += 1
+      end
+    end
+
+    def divisors(m)
+      sq = Math.sqrt(m)
+      2 * (1..sq.to_i).select{|k| m % k == 0}.length - (sq == sq.to_i ? 1 : 0)
     end
   end
 end

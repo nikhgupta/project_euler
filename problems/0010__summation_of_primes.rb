@@ -15,9 +15,7 @@ require File.dirname(File.dirname(__FILE__)) + '/lib/base.rb'
 module ProjectEuler
   class Solution10 < BaseSolution
 
-    def solve; solve1; end
-
-    def solve1
+    def solve
       # set default query:
       n = @params[0].to_i
       n = n > 0 ? n : 2000000
@@ -26,35 +24,27 @@ module ProjectEuler
       self.mark_as_solved
 
       # code:
+      solve1(n)     # Time: ~05 sec
+      # solve2(n)   # Time: ~16 sec
+    end
+
+    def solve1(n)
       require 'prime'
       Prime.take_while{|k| k < n}.inject(&:+)
     end
 
-    def solve2
-      # set default query:
-      n = @params[0].to_i
-      n = n > 0 ? n : 2000000
-
-      # solved:
-      self.mark_as_solved
-
-      # code:
-      sum = 5
-      k = 5
+    def solve2(n)
+      sum = 5; k = 5
       while k < n
         sum += k if is_prime?(k)
         k += 1
-      end
-
-      # answer
-      sum
+      end; sum
     end
 
     def is_prime?(k)
       (2..(Math.sqrt(k).to_i)).each do |x|
         return false if k % x == 0
-      end
-      true
+      end; true
     end
   end
 end
