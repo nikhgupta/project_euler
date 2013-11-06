@@ -37,7 +37,6 @@ module ProjectEuler
         memo[:counted] += memo[:recent] * perms
         memo[:answer]  += memo[:recent].to_s
         k -= 1
-        binding.pry
       end
 
       memo[:answer]
