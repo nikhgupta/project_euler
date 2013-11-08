@@ -26,24 +26,54 @@ module ProjectEuler
       n = n > 0 ? n : 1000000
 
       # solved:
-      # self.mark_as_solved
+      self.mark_as_solved
+
+      # gotchas with "n"
+      return "max value of n is restricted to 3628799" if n >= factorial(10)
 
       # code:
-      k = 9
-      memo = {counted: 0, recent: 0, answer: ""}
-      while memo[:counted] < n
-        perms = factorial(k)
-        memo[:recent]   = (n - memo[:counted]) / perms
-        memo[:counted] += memo[:recent] * perms
-        memo[:answer]  += memo[:recent].to_s
-        k -= 1
-      end
+      solve2(n)
+    end
 
-      memo[:answer]
+    def solve2(n)
+      n -= 1
+      number = ""
+      unused = (0..9).to_a
+      while unused.any?
+        f  = factorial(unused.length - 1)
+        q  = n / f
+        n %= f
+        number += unused[q].to_s
+        unused.delete_at(q)
+      end
+      number
+    end
+
+    def solve1(n)
+      digit   = 0   # current digit
+      level   = 9   # current permutation level
+      number  = ""
+      unused  = (0..9).to_a
+      counter = 0
+      while unused.any?
+        permutations = factorial(level)
+        if n <= permutations
+          counter = 0
+          level -= 1
+          number += digit.to_s
+          unused.delete(digit)
+          digit = unused[0]
+        else
+          counter += 1
+          n -= permutations
+          digit = unused[counter]
+        end
+      end
+      number
     end
 
     def factorial(n)
-      n == 1 ? 1 : n * factorial(n-1)
+      n < 2 ? 1 : n * factorial(n-1)
     end
   end
 end

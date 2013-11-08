@@ -35,7 +35,7 @@ module ProjectEuler
       n.each_with_index do |v, i|
         sum += name_score(v, i+1)
       end
-      
+
       # answer
       sum
     end

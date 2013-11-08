@@ -3,8 +3,8 @@
 
 # The Problem: https://projecteuler.net/problem=20
 # ============================================================================
-# n! means n  (n  1)  ...  3  2  1
-# For example, 10! = 10  9  ...  3  2  1 = 3628800,and the sum of the digits
+# n! means n x (n - 1) x ...  3 x 2 x 1
+# For example, 10! = 10 x 9 x ... 3 x 2 x 1 = 3628800,and the sum of the digits
 # in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
 # Find the sum of the digits in the number 100!
 # ----------------------------------------------------------------------------
@@ -13,17 +13,26 @@
 # ----------------------------------------------------------------------------
 
 require File.dirname(File.dirname(__FILE__)) + '/lib/base.rb'
+require 'bigdecimal'
 
 module ProjectEuler
   class Solution20 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query:
+      n = @params[0].to_i
+      n = n > 0 ? n : 100
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+      # solved:
+      self.mark_as_solved
 
-      # start writing your code now..
+      # code:
+      factorial(n).to_i.to_s.split("").map(&:to_i).inject(0) {|sum, k| sum + k}
+    end
+
+    def factorial(k)
+      return BigDecimal.new(1) if k == 1
+      k * factorial(k-1)
     end
   end
 end

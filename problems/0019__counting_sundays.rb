@@ -27,12 +27,53 @@ module ProjectEuler
   class Solution19 < BaseSolution
 
     def solve
-      # this method should start execution to return the answer to the problem.
+      # set default query: century
+      n = @params[0].to_i
+      n = n > 0 ? n : 20
 
-      # uncomment the following, when you have solved this problem.
-      # self.mark_as_solved
+      # solved:
+      self.mark_as_solved
 
-      # start writing your code now..
+      # code:
+      # monday is 1, and sunday is 7
+      counter = 0
+      day     = 2        # 1 January, 1901
+      year    = 1901
+      while year < 2001
+        counter += 1 if day % 7 == 0 # january 1
+        day += 31
+        counter += 1 if day % 7 == 0 # february 1
+        day += (leap_year?(year) ? 29 : 28)
+        counter += 1 if day % 7 == 0 # march 1
+        day += 31
+        counter += 1 if day % 7 == 0 # april 1
+        day += 30
+        counter += 1 if day % 7 == 0 # may 1
+        day += 31
+        counter += 1 if day % 7 == 0 # june 1
+        day += 30
+        counter += 1 if day % 7 == 0 # july 1
+        day += 31
+        counter += 1 if day % 7 == 0 # august 1
+        day += 31
+        counter += 1 if day % 7 == 0 # september 1
+        day += 30
+        counter += 1 if day % 7 == 0 # october 1
+        day += 31
+        counter += 1 if day % 7 == 0 # november 1
+        day += 30
+        counter += 1 if day % 7 == 0 # december 1
+        day += 31
+        year += 1
+      end
+
+      # answer
+      counter
+    end
+
+    def leap_year?(year)
+      return false if year % 100 == 0 && year % 400 != 0
+      year % 4 == 0
     end
   end
 end
